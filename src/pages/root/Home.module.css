@@ -1,0 +1,25 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-bottom: 1px solid black;
+}
+.unordered-list {
+  display: flex;
+  list-style-type: none;
+  margin: 0px 0px;
+  padding: 0px 0px;
+}
+.list_items {
+  padding: 10px 10px;
+}
+.heading {
+  margin: 0px 0px;
+}
+
+.header-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
