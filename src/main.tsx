@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Home } from "./pages/root/Home.js";
+import { LabelPage } from "./pages/labels/LabelPage.js";
+import { ShellRoot } from "./components/shell/ShellRoot.js";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { runServer } from "./server/server.js";
@@ -13,7 +15,17 @@ runServer();
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <ShellRoot />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "/labels/:label",
+        element: <LabelPage />,
+      },
+    ],
   },
 ]);
 

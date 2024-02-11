@@ -38,7 +38,7 @@ const runServer = () => {
     routes() {
       this.namespace = "api";
 
-      this.get("/notes", () => DB_v2, { timing: 4000 });
+      this.get("/notes", () => DB_v2);
 
       this.post("/notes", (schema, { requestBody }) => {
         let noteRes = JSON.parse(requestBody);
