@@ -1,0 +1,14 @@
+.drop-down {
+  position: absolute;
+  z-index: 2;
+  border: 2px blue solid;
+  padding: 10px;
+  background-color: white;
+}
+
+.color-filter {
+  display: block;
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+}

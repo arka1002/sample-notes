@@ -43,11 +43,32 @@ type ColorsField = {
   name: string;
 }[];
 
+type ContextType = {
+  noteList: NotesResponse | undefined | null;
+  isFetchSuccessful: boolean;
+  params: string | undefined | null;
+  order: OrderTypes;
+};
+
+type Visibilities = {
+  isFormVisible: boolean;
+  isSortVisible: boolean;
+  isFilterVisible: boolean;
+};
+
+type OrderTypes = {
+  dateStartFromToday: boolean;
+  dateStartFromPast: boolean;
+};
+
 export {
   type formErrorMessages,
   type MovieResponse,
   type NotesResponse,
   type Notes,
   type SelectFields,
-  type ColorsField
+  type ColorsField,
+  type ContextType,
+  type Visibilities,
+  type OrderTypes,
 };

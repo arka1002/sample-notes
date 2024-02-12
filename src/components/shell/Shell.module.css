@@ -23,3 +23,14 @@
   justify-content: space-around;
 }
 
+.sort {
+  position: relative;
+}
+
+.drop-down {
+  position: absolute;
+  z-index: 2;
+  border: 2px blue solid;
+  padding: 10px;
+  background-color: white;
+}

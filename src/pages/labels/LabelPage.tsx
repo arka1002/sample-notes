@@ -1,5 +1,5 @@
 import { Note } from "../../components/note/Note";
-import { useNotes } from "../../components/shell/ShellRoot";
+import { useNotes } from "../../context/context.js";
 import { Notes } from "../../types/custom.js";
 const LabelPage = () => {
   let notes = useNotes();

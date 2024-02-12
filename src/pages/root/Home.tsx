@@ -1,5 +1,6 @@
 import { Note } from "../../components/note/Note.js";
-import { useNotes } from "../../components/shell/ShellRoot.js";
+import { useNotes } from "../../context/context.js";
+import { viewAccToState } from "../../types/values.js";
 
 const Home = () => {
   // read --> https://stackoverflow.com/a/37562814
@@ -9,27 +10,30 @@ const Home = () => {
   // 1. select fields ...
   // 2. sort & filter functions ...
   // 3. routes
-  // 4. variable names ( laterzzz.... )
+  // 4. edit feature
+  // 5. variable names ( laterzzz.... )
   // ... & done (?????????)
 
   let notes = useNotes();
 
   return (
     <>
-      {notes.isFetchSuccessful
-        ? notes.noteList?.notes.map((note) => (
-            <Note
-              id={note.id}
-              heading={note.heading}
-              message={note.message}
-              time={note.time}
-              labels={note.labels}
-              colors={note.colors}
-              priorities={note.priorities}
-              key={note.id}
-            />
-          ))
-        : null}
+      {notes.isFetchSuccessful ? (
+        viewAccToState(notes.noteList?.notes, notes.order)?.map((note) => (
+          <Note
+            id={note.id}
+            heading={note.heading}
+            message={note.message}
+            time={note.time}
+            labels={note.labels}
+            colors={note.colors}
+            priorities={note.priorities}
+            key={note.id}
+          />
+        ))
+      ) : (
+        <></>
+      )}
     </>
   );
 };
