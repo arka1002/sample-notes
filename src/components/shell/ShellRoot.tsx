@@ -4,6 +4,7 @@ import {
   ContextType,
   Visibilities,
   OrderTypes,
+  FilterTypes,
 } from "../../types/custom.js";
 import { Outlet, NavLink, useParams } from "react-router-dom";
 import styles from "./Shell.module.css";
@@ -39,6 +40,15 @@ const ShellRoot = () => {
     dateStartFromToday: false,
     dateStartFromPast: false,
   });
+
+  let [filter, setFilter] = useState<FilterTypes>({
+    labels: undefined,
+    colors: undefined,
+  });
+
+  let changeFilter = (newFilter: FilterTypes): undefined => {
+    setFilter(newFilter);
+  };
 
   let setDateAscending = (): undefined => {
     let another_clone = structuredClone(order);
@@ -112,7 +122,11 @@ const ShellRoot = () => {
           </div>
           <div className={styles.sort}>
             <button onClick={viewFilter}>Filter</button>
-            <FilterForm isFormVisible={isVisible.isFilterVisible}  />
+            <FilterForm
+              isFormVisible={isVisible.isFilterVisible}
+              filterState={filter}
+              changeFilter={changeFilter}
+            />
           </div>
         </section>
         <button onClick={viewForm}>Add Note</button>
@@ -128,6 +142,7 @@ const ShellRoot = () => {
                   isFetchSuccessful: qSuccessful,
                   params: params.label,
                   order,
+                  filter,
                 } satisfies ContextType
               }
             />

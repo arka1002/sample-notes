@@ -6,23 +6,27 @@ import {
   colors_select,
 } from "../../types/values.js";
 import { ChangeEvent } from "react";
+import { FilterTypes } from "../../types/custom.js";
 
 type FilterForm = {
   isFormVisible: boolean;
+  filterState: FilterTypes;
+  changeFilter: (val: FilterTypes) => undefined;
 };
 
-const FilterForm = ({ isFormVisible }: FilterForm) => {
+const FilterForm = ({
+  isFormVisible,
+  filterState,
+  changeFilter,
+}: FilterForm) => {
   if (isFormVisible === false) {
     return <></>;
   }
-  let setLabel = (labelName: string, event: ChangeEvent<HTMLInputElement>) => {
-    // { labelName, event.target.value }
+  let setLabel = (labelName: string) => {
+    changeFilter({ ...filterState, labels: labelName });
   };
 
-  let setColor = (
-    colorName: string,
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  let setColor = (colorName: string, event: ChangeEvent<HTMLInputElement>) => {
     console.log({ colorName, event });
   };
   return (
@@ -35,7 +39,7 @@ const FilterForm = ({ isFormVisible }: FilterForm) => {
               type="radio"
               name={label_select}
               id={label.content}
-              onChange={(event) => setLabel(label.content, event)}
+              onChange={() => setLabel(label.content)}
             />
           </label>
         ))}

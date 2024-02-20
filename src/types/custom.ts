@@ -43,11 +43,17 @@ type ColorsField = {
   name: string;
 }[];
 
+type FilterTypes = {
+  labels: string | undefined;
+  colors: string | undefined;
+};
+
 type ContextType = {
   noteList: NotesResponse | undefined | null;
   isFetchSuccessful: boolean;
   params: string | undefined | null;
   order: OrderTypes;
+  filter: FilterTypes;
 };
 
 type Visibilities = {
@@ -71,4 +77,5 @@ export {
   type ContextType,
   type Visibilities,
   type OrderTypes,
+  type FilterTypes,
 };
