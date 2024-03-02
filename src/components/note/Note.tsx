@@ -1,14 +1,26 @@
 import styles from "./Note.module.css";
 import { type Notes } from "../../types/custom.js";
+import { useState } from "react";
 
-const Note = ({ id, heading, message, time: forgo, labels, colors, priorities }: Notes) => {
+const Note = ({
+  id,
+  heading,
+  message,
+  time: forgo,
+  labels,
+  colors,
+  priorities,
+}: Notes) => {
   let time = new Date(forgo);
+  let [canEdit, setCanEdit] = useState<boolean>(false);
+  let editFormHandler = () => {}
+
   return (
     <>
       <div className={styles.noteCard} key={id}>
         <div className={styles.noteHeader}>
           <h3>{heading}</h3>
-          <button>options</button>
+          <button onClick={() => setCanEdit(!canEdit)}>options</button>
         </div>
         <div className={styles.noteContent}>{message}</div>
         {/* fix css */}
@@ -18,6 +30,7 @@ const Note = ({ id, heading, message, time: forgo, labels, colors, priorities }:
           {` => ${time.getDate()}/${time.getMonth() + 1}/${time.getFullYear()}`}
         </div>
       </div>
+      {canEdit && <form>1</form>}
     </>
   );
 };

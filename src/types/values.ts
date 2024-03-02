@@ -1,4 +1,10 @@
-import { SelectFields, ColorsField, Notes, OrderTypes } from "./custom.js";
+import {
+  SelectFields,
+  ColorsField,
+  Notes,
+  OrderTypes,
+  FilterTypes,
+} from "./custom.js";
 
 let heading_field = "heading";
 let content_field = "message";
@@ -52,20 +58,49 @@ let priorities: Array<string> = ["Low", "Medium", "High"];
 
 let viewAccToState = (
   notesArray: Notes[] | undefined,
-  sortingOrder: OrderTypes
+  sortingOrder: OrderTypes,
+  { colors, labels }: FilterTypes
 ) => {
-
   // if filter & sort are both applied, lets filter 1st & then sort acc to date
   // if only filter is applied, and no sort just give the filtered output
   // same with sort ed ness
 
+  // colors can be undefined or contain a string of a color code
+  // labels can be undefined or contain a label name
 
-  if (sortingOrder.dateStartFromToday === false && sortingOrder.dateStartFromPast === false) {
-    return notesArray;
+  let temporaryArray: Notes[];
+
+  if (colors === undefined && labels === undefined) {
+    temporaryArray = notesArray as Notes[];
+  } else if (colors === undefined && labels !== undefined) {
+    temporaryArray = notesArray?.filter(note => {
+      if (note.labels === labels) {
+        return note;
+      }
+    }) as Notes[];
+  } else if (colors !== undefined && labels === undefined) {
+    temporaryArray = notesArray?.filter(note => {
+      if (note.colors === colors) {
+        return note;
+      }
+    }) as Notes[];
+  } else {
+    temporaryArray = notesArray?.filter(note => {
+      if (note.colors === colors && note.labels === labels) {
+        return note;
+      }
+    }) as Notes[];
+  }
+
+  if (
+    sortingOrder.dateStartFromToday === false &&
+    sortingOrder.dateStartFromPast === false
+  ) {
+    return temporaryArray;
   }
 
   if (sortingOrder.dateStartFromToday) {
-    return notesArray?.sort((a, b) => {
+    return temporaryArray.sort((a, b) => {
       let foo = new Date(a.time).getTime();
       let bazz = new Date(b.time).getTime();
       return bazz - foo;
@@ -73,7 +108,7 @@ let viewAccToState = (
   }
 
   if (sortingOrder.dateStartFromPast) {
-    return notesArray?.sort((a, b) => {
+    return temporaryArray.sort((a, b) => {
       let foo = new Date(a.time).getTime();
       let bazz = new Date(b.time).getTime();
       return foo - bazz;

@@ -48,6 +48,17 @@ const runServer = () => {
         DB_v2.notes.push(noteRes);
         return { message: "success" };
       });
+
+      this.post("/notes/edit", (schema, { requestBody }) => {
+        let noteRes = JSON.parse(requestBody);
+        noteRes.time = new Date(noteRes?.time);
+        try {
+          DB_v2.notes[noteRes.id] = noteRes;
+          return "successful";
+        } catch (error) {
+          return "failed";
+        }
+      })
     },
   });
 };

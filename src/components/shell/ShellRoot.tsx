@@ -102,7 +102,11 @@ const ShellRoot = () => {
       <nav className={styles.navigation}>
         <NavLink to={"/"}>Home</NavLink>
         {labels.map((label, index) => (
-          <NavLink to={`/labels/${label.content}`} key={index}>
+          <NavLink
+            to={`/labels/${label.content}`}
+            key={index}
+            state={{ label: label.content }}
+          >
             {label.content}
           </NavLink>
         ))}

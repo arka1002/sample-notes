@@ -14,12 +14,12 @@ const Home = () => {
   // 5. variable names ( laterzzz.... )
   // ... & done (?????????)
 
-  let notes = useNotes();
+  let { order, isFetchSuccessful, noteList, filter } = useNotes();
 
   return (
     <>
-      {notes.isFetchSuccessful ? (
-        viewAccToState(notes.noteList?.notes, notes.order)?.map((note) => (
+      {isFetchSuccessful ? (
+        viewAccToState(noteList?.notes, order, filter)?.map((note) => (
           <Note
             id={note.id}
             heading={note.heading}

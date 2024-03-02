@@ -9,7 +9,13 @@ type SortFormProps = {
   clearAll: () => undefined;
 };
 
-const SortForm = ({ isFormVisible, checkedValues, handleAsc, handleDesc, clearAll }: SortFormProps) => {
+const SortForm = ({
+  isFormVisible,
+  checkedValues: { dateStartFromPast, dateStartFromToday },
+  handleAsc,
+  handleDesc,
+  clearAll,
+}: SortFormProps) => {
   if (isFormVisible === false) {
     return <></>;
   }
@@ -25,7 +31,7 @@ const SortForm = ({ isFormVisible, checkedValues, handleAsc, handleDesc, clearAl
           name="date"
           id={date_ids.ascending}
           onChange={handleAsc}
-          checked={checkedValues.dateStartFromToday}
+          checked={dateStartFromToday}
         />
         <label htmlFor={date_ids.ascending}>{date_ids.ascending}</label>
         <input
@@ -33,7 +39,7 @@ const SortForm = ({ isFormVisible, checkedValues, handleAsc, handleDesc, clearAl
           name="date"
           id={date_ids.descending}
           onChange={handleDesc}
-          checked={checkedValues.dateStartFromPast}
+          checked={dateStartFromPast}
         />
         <label htmlFor={date_ids.descending}>{date_ids.descending}</label>
         <button onClick={clearAll}>Clear All</button>
