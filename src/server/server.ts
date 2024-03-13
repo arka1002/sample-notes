@@ -52,12 +52,15 @@ const runServer = () => {
       this.post("/notes/edit", (schema, { requestBody }) => {
         let noteRes = JSON.parse(requestBody);
         noteRes.time = new Date(noteRes?.time);
+        console.log("received message", noteRes);
         try {
-          DB_v2.notes[noteRes.id] = noteRes;
+          let foo = DB_v2.notes.findIndex(note => note.id === noteRes.id);
+          DB_v2.notes[foo] = noteRes;
           return "successful";
         } catch (error) {
           return "failed";
         }
+        return "";
       })
     },
   });

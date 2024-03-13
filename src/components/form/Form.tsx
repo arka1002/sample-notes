@@ -105,7 +105,6 @@ const Form = ({ isFormVisible }: FormProps) => {
     const buzzy: any = {};
     foo.forEach((value, key) => (buzzy[key] = value));
     buzzy.colors = codeForValue(VALUES.colors, buzzy.colors);
-    console.log(buzzy);
     mutOp(buzzy);
   };
 
@@ -163,4 +162,4 @@ const Form = ({ isFormVisible }: FormProps) => {
   );
 };
 
-export { Form };
+export { Form, codeForValue };

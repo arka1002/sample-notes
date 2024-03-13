@@ -1,6 +1,7 @@
 import styles from "./Note.module.css";
 import { type Notes } from "../../types/custom.js";
 import { useState } from "react";
+import { EditForm } from "../form/EditForm.js";
 
 const Note = ({
   id,
@@ -13,7 +14,6 @@ const Note = ({
 }: Notes) => {
   let time = new Date(forgo);
   let [canEdit, setCanEdit] = useState<boolean>(false);
-  let editFormHandler = () => {}
 
   return (
     <>
@@ -30,7 +30,7 @@ const Note = ({
           {` => ${time.getDate()}/${time.getMonth() + 1}/${time.getFullYear()}`}
         </div>
       </div>
-      {canEdit && <form>1</form>}
+      {canEdit && <EditForm id={id} closeForm={setCanEdit} />}
     </>
   );
 };
